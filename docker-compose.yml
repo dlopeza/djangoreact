@@ -1,6 +1,14 @@
 version: '3'
 
 services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
 
   django:
     build: ./backend
@@ -11,6 +19,8 @@ services:
       - "8000:8000"
     environment:
       SECRET_KEY: AABBCCs3cr3tXXYYZZ
+    depends_on:
+      - db
 
   frontend:
     build: ./frontend
